@@ -82,7 +82,6 @@
 
 - (void)initStockView {
     [YYStockVariable setStockLineWidthArray:@[@6,@6,@6,@6]];
-    
     YYStock *stock = [[YYStock alloc]initWithFrame:self.stockContainerView.frame dataSource:self];
     _stock = stock;
     [self.stockContainerView addSubview:stock.mainView];
@@ -91,7 +90,7 @@
     }];
     //添加单击监听
     UITapGestureRecognizer *tap = [[UITapGestureRecognizer alloc]initWithTarget:self action:@selector(stock_enterFullScreen:)];
-    tap.numberOfTapsRequired = 1;
+    tap.numberOfTapsRequired = 2;
     [self.stock.containerView addGestureRecognizer:tap];
     [self.stock.containerView.subviews setValue:@0 forKey:@"userInteractionEnabled"];
     
@@ -99,8 +98,9 @@
 
 /*******************************************股票数据源获取更新*********************************************/
 /**
- 网络获取K线数据
+ 网络获取K线数据 本地数据
  */
+
 - (void)fetchData {
     
     [AppServer Get:@"five" params:nil success:^(NSDictionary *response) {
